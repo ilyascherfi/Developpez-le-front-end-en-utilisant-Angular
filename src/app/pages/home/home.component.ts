@@ -7,9 +7,12 @@ import { TitleComponent } from 'src/app/title/title.component';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  standalone: true,
+  imports: [TitleComponent] // Ajoutez TitleComponent ici
 })
 export class HomeComponent implements OnInit {
   public olympics$: Observable<any> = of(null);
+
   constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
