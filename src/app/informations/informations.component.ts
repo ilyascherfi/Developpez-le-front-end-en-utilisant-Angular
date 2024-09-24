@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-informations',
@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './informations.component.scss'
 })
 export class InformationsComponent {
-
+  @Input() textInformation!: string;
+  @Input() numberInformation!: number;
 }
