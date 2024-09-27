@@ -15,6 +15,7 @@ export class OlympicService {
 
   loadInitialData() {
     return this.http.get<Olympic[]>(this.olympicUrl).pipe(
+      tap(console.log),
       tap((value) => this.olympics$.next(value)),
       catchError((error, caught) => {
         // TODO: improve error handling
