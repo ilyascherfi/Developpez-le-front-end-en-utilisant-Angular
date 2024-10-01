@@ -8,7 +8,7 @@ import { Olympic } from 'src/app/core/models/Olympic';
 interface ChartData {
   id: number,
   country: string,
-  totalMedals: number
+  medalCount: number
 }
 
 @Component({
@@ -33,13 +33,14 @@ export class HomeComponent implements OnInit {
   };
   public olympics$: Observable<Olympic[]> = of([]);
 
+  public chartData: ChartData[] = []
   constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
     this.olympics$.subscribe(olympicsDataArray => {
       const chartData = olympicsDataArray.map(olympic => {
-        let medalCount = 0
+        let medalCount:number = 0
         olympic.participations.forEach((participation) => { medalCount += participation.medalsCount})
         return {
           id: olympic.id,
@@ -47,7 +48,7 @@ export class HomeComponent implements OnInit {
           medalCount: medalCount
         }
       })
-      console.log("chartData",chartData)
+      this.chartData = chartData
     })
 
   }
