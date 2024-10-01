@@ -4,6 +4,7 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 import { InformationsComponent } from 'src/app/informations/informations.component';
 import { TitleComponent } from 'src/app/title/title.component';
 import { Olympic } from 'src/app/core/models/Olympic';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 interface ChartData {
   id: number,
@@ -16,7 +17,7 @@ interface ChartData {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [TitleComponent, InformationsComponent]
+  imports: [TitleComponent, InformationsComponent, NgxChartsModule]
 })
 export class HomeComponent implements OnInit {
   view: [number, number] = [700, 400];

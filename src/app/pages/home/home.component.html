@@ -7,4 +7,9 @@
     <app-informations [textInformation]="'Number of JOs'" [numberInformation]="3"></app-informations>
     <app-informations [textInformation]="'Number of Countries'" [numberInformation]="5"></app-informations>
   </div>
+
+  <div class="pie-chart-container">
+    <ngx-charts-pie-chart [view]="view" [results]="chartData" [gradient]="gradient"  [labels]="showLabels" [doughnut]="isDoughnut" (select)="onSelect($event)">
+    </ngx-charts-pie-chart>
+  </div>
 </div>
