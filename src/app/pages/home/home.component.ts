@@ -3,6 +3,8 @@ import { Observable, of } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Olympic } from 'src/app/core/models/Olympic';
 import { Color, id, LegendPosition } from '@swimlane/ngx-charts';
+import { Router } from '@angular/router';
+
 
 interface ChartData {
   id: number,
@@ -31,7 +33,9 @@ export class HomeComponent implements OnInit {
   public olympics$: Observable<Olympic[]> = of([]);
 
   public chartData: ChartData[] = []
-  constructor(private olympicService: OlympicService) {}
+  constructor(private olympicService: OlympicService,
+              private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
@@ -48,7 +52,16 @@ export class HomeComponent implements OnInit {
         }
       })
       this.chartData = chartData
+      console.log("chartData", chartData)
     })
 
+  }
+
+  onSelect(event: {name: string, value: number, label: string}): void {
+    const selectedCountry : ChartData | undefined = this.chartData.find(country => country.name === event.name)
+    if (selectedCountry !== undefined) {
+      const id:number = selectedCountry.id
+      this.router.navigateByUrl(`details/${id}`)
+    }
   }
 }
