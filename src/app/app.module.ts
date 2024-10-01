@@ -3,14 +3,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HomeComponent } from './pages/home/home.component';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { InformationsComponent } from './informations/informations.component';
+import { TitleComponent } from './title/title.component';
 
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, HomeComponent, NgxChartsModule, BrowserAnimationsModule],
+  declarations: [AppComponent, HomeComponent, NotFoundComponent,],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, NgxChartsModule, BrowserAnimationsModule, InformationsComponent, TitleComponent],
   providers: [],
   bootstrap: [AppComponent],
 })
