@@ -24,6 +24,9 @@
   display: flex;
   width: 50%;
   justify-content: space-around;
+  p, h3 {
+    margin: 5px;
+  }
   .informations {
     display: flex;
     flex-direction: column;
