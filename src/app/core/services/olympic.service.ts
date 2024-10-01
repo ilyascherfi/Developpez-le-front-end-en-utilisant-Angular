@@ -28,4 +28,8 @@ export class OlympicService {
   getOlympics() {
     return this.olympics$.asObservable();
   }
+
+  get0lympicsById() {
+
+  }
 }

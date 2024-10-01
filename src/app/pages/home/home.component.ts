@@ -61,7 +61,8 @@ export class HomeComponent implements OnInit {
     const selectedCountry : ChartData | undefined = this.chartData.find(country => country.name === event.name)
     if (selectedCountry !== undefined) {
       const id:number = selectedCountry.id
-      this.router.navigateByUrl(`details/${id}`)
+      console.log("selected", selectedCountry)
+      // this.router.navigateByUrl(`details/${id}`)
     }
   }
 }

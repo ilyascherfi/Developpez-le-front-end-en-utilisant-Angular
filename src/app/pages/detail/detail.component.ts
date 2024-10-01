@@ -24,7 +24,16 @@ export class DetailComponent implements OnInit {
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
+
+
+
+  constructor(private olympicService: OlympicService,
+              private router: Router
+  ) {}
+
   ngOnInit(): void {
+
+
   }
 
 }
