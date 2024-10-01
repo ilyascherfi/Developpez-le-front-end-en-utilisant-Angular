@@ -11,9 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { InformationsComponent } from './informations/informations.component';
 import { TitleComponent } from './title/title.component';
+import { DetailComponent } from './pages/detail/detail.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NotFoundComponent,],
+  declarations: [AppComponent, HomeComponent, NotFoundComponent, DetailComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, NgxChartsModule, BrowserAnimationsModule, InformationsComponent, TitleComponent],
   providers: [],
   bootstrap: [AppComponent],

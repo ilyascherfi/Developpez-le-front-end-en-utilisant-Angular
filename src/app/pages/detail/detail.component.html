@@ -1,1 +1,16 @@
-<p>detail works!</p>
+<div class="container">
+  <div class="title">
+    <app-title [title]="'Medal Per Country'"></app-title>
+  </div>
+
+  <div class="informations-container">
+    <app-informations [textInformation]="'Number of entries'" [numberInformation]="3"></app-informations>
+    <app-informations [textInformation]="'Number of medals'" [numberInformation]="5"></app-informations>
+    <app-informations [textInformation]="'Total number of athletes'" [numberInformation]="5"></app-informations>
+  </div>
+
+  <div class="pie-chart-container">
+    <ngx-charts-pie-chart [view]="view"  [gradient]="gradient"  [labels]="showLabels" [doughnut]="isDoughnut" >
+    </ngx-charts-pie-chart>
+  </div>
+</div>
