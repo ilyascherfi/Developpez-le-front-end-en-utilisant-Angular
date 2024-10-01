@@ -6,8 +6,8 @@ import { Color, id, LegendPosition } from '@swimlane/ngx-charts';
 
 interface ChartData {
   id: number,
-  country: string,
-  medalCount: number
+  name: string,
+  value: number
 }
 
 @Component({
@@ -39,14 +39,12 @@ export class HomeComponent implements OnInit {
       const chartData = olympicsDataArray.map(olympic => {
         let medalCount:number = 0
         olympic.participations.forEach((participation) => {
-          if (participation && participation.medalsCount !== undefined) {
             medalCount += participation.medalsCount;
-          }
         })
         return {
           id: olympic.id,
-          country: olympic.country,
-          medalCount: medalCount
+          name: olympic.country,
+          value: medalCount
         }
       })
       this.chartData = chartData
