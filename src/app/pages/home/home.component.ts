@@ -5,6 +5,12 @@ import { InformationsComponent } from 'src/app/informations/informations.compone
 import { TitleComponent } from 'src/app/title/title.component';
 import { Olympic } from 'src/app/core/models/Olympic';
 
+interface ChartData {
+  id: number,
+  country: string,
+  totalMedals: number
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -31,7 +37,18 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
-
+    this.olympics$.subscribe(olympicsDataArray => {
+      const chartData = olympicsDataArray.map(olympic => {
+        let medalCount = 0
+        olympic.participations.forEach((participation) => { medalCount += participation.medalsCount})
+        return {
+          id: olympic.id,
+          country: olympic.country,
+          medalCount: medalCount
+        }
+      })
+      console.log("chartData",chartData)
+    })
 
   }
 }
