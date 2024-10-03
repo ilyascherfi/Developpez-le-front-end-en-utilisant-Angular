@@ -52,7 +52,6 @@ export class HomeComponent implements OnInit {
         }
       })
       this.chartData = chartData
-      console.log("chartData", chartData)
     })
 
   }
@@ -61,7 +60,6 @@ export class HomeComponent implements OnInit {
     const selectedCountry : ChartData | undefined = this.chartData.find(country => country.name === event.name)
     if (selectedCountry !== undefined) {
       const id:number = selectedCountry.id
-      console.log("selected", selectedCountry)
       // this.router.navigateByUrl(`details/${id}`)
     }
   }
