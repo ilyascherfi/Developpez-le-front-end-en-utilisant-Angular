@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Olympic } from 'src/app/core/models/Olympic';
 import { Color, id, LegendPosition } from '@swimlane/ngx-charts';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss'
 })
+
 export class DetailComponent implements OnInit {
   view: [number, number] = [700, 400];
 
@@ -28,12 +29,12 @@ export class DetailComponent implements OnInit {
 
 
   constructor(private olympicService: OlympicService,
-              private router: Router
+              private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-
-
+    const id = this.route.snapshot.params['id']
+    this.olympicService.get0lympicsById(id)
   }
 
 }
