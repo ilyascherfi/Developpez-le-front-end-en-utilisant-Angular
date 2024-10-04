@@ -45,7 +45,7 @@ export class DetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const olympicId = +this.route.snapshot.params['id']; // Ensure it's a number with + operator
+    const olympicId = +this.route.snapshot.params['id'];
 
     if (olympicId) {
       this.olympics$ = this.olympicService.getOlympicsById(olympicId);
@@ -58,25 +58,20 @@ export class DetailComponent implements OnInit {
           olympic.participations.forEach(p => {
             this.totalMedalsCount += p.medalsCount;
           })
-          // Transform the data into the multi-series format
+
           const multi = olympic.participations.map(participation => ({
-            name: olympic.country,  // Country name
+            name: olympic.country,
             series: olympic.participations.map(p => ({
-              name: p.year.toString(), // Year as string
-              value: p.medalsCount // Number of medals as value
+              name: p.year.toString(),
+              value: p.medalsCount
             }))
           }));
 
-          // Assign multi to the chartData
-          this.chartData = multi;
-          console.log('Multi-series chart data:', multi);
 
-        } else {
-          console.log('Olympic not found');
+          this.chartData = multi;
+
         }
       });
-    } else {
-      console.log('Invalid Olympic ID');
     }
   }
 
