@@ -9,5 +9,5 @@ import { Component, Input } from '@angular/core';
 })
 export class InformationsComponent {
   @Input() textInformation!: string;
-  @Input() numberInformation!: number;
+  @Input() numberInformation!: number | undefined;
 }

@@ -1,16 +1,30 @@
 <div class="container">
   <div class="title">
-    <app-title [title]="'Medal Per Country'"></app-title>
+    <app-title [title]="(olympics$ | async)?.country"></app-title>
   </div>
 
   <div class="informations-container">
-    <app-informations [textInformation]="'Number of entries'" [numberInformation]="3"></app-informations>
-    <app-informations [textInformation]="'Number of medals'" [numberInformation]="5"></app-informations>
-    <app-informations [textInformation]="'Total number of athletes'" [numberInformation]="5"></app-informations>
+    <app-informations [textInformation]="'Number of entries'"
+                      [numberInformation]="(olympics$ | async)?.participations?.length">
+    </app-informations>
+    <app-informations [textInformation]="'Number of medals'"
+                      [numberInformation]="totalMedalsCount">
+    </app-informations>
+    <app-informations [textInformation]="'Total number of athletes'"
+                      [numberInformation]="totalAthleteCount">
+    </app-informations>
   </div>
 
   <div class="pie-chart-container">
-    <ngx-charts-pie-chart [view]="view"  [gradient]="gradient"  [labels]="showLabels" [doughnut]="isDoughnut" >
-    </ngx-charts-pie-chart>
+    <ngx-charts-line-chart [view]="view"
+                           [showXAxisLabel]="showXAxisLabel"
+                           [showYAxisLabel]="showYAxisLabel"
+                           [xAxis]="xAxis"
+                           [yAxis]="yAxis"
+                           [xAxisLabel]="xAxisLabel"
+                           [yAxisLabel]="yAxisLabel"
+                           [timeline]="timeline"
+                           [results]="chartData">
+    </ngx-charts-line-chart>
   </div>
 </div>
