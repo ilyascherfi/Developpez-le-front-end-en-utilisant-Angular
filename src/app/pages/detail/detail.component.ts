@@ -13,14 +13,26 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 export class DetailComponent implements OnInit {
+  title: string = 'Name Country';
+
+  public olympics$: Observable<Olympic | undefined> = of(undefined); // Correct type
+  public totalAthleteCount: number = 0;
+  public totalMedalsCount: number = 0;
   view: [number, number] = [700, 400];
 
   // options
-  gradient: boolean = true;
-  showLegend: boolean = true;
+  legend: boolean = true;
   showLabels: boolean = true;
-  isDoughnut: boolean = false;
-  legendPosition: LegendPosition = LegendPosition.Below;
+  animations: boolean = true;
+  xAxis: boolean = true;
+  yAxis: boolean = true;
+  showYAxisLabel: boolean = true;
+  showXAxisLabel: boolean = true;
+  xAxisLabel: string = 'Year';
+  yAxisLabel: string = 'Population';
+  timeline: boolean = true;
+
+  public chartData: any[] = [];
 
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -33,8 +45,39 @@ export class DetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id']
-    this.olympicService.get0lympicsById(id)
+    const olympicId = +this.route.snapshot.params['id']; // Ensure it's a number with + operator
+
+    if (olympicId) {
+      this.olympics$ = this.olympicService.getOlympicsById(olympicId);
+
+      this.olympics$.subscribe(olympic => {
+        if (olympic) {
+          olympic.participations.forEach(p => {
+            this.totalAthleteCount += p.athleteCount;
+          })
+          olympic.participations.forEach(p => {
+            this.totalMedalsCount += p.medalsCount;
+          })
+          // Transform the data into the multi-series format
+          const multi = olympic.participations.map(participation => ({
+            name: olympic.country,  // Country name
+            series: olympic.participations.map(p => ({
+              name: p.year.toString(), // Year as string
+              value: p.medalsCount // Number of medals as value
+            }))
+          }));
+
+          // Assign multi to the chartData
+          this.chartData = multi;
+          console.log('Multi-series chart data:', multi);
+
+        } else {
+          console.log('Olympic not found');
+        }
+      });
+    } else {
+      console.log('Invalid Olympic ID');
+    }
   }
 
 }
