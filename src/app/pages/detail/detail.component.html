@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="go-back">
+    <button routerLink="">Go back</button>
+  </div>
   <div class="title">
     <app-title [title]="(olympics$ | async)?.country"></app-title>
   </div>
