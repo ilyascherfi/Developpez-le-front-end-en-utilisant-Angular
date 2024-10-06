@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError, filter, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, filter, tap, map } from 'rxjs/operators';
 import { Olympic } from '../models/Olympic';
 
 @Injectable({
@@ -29,7 +29,28 @@ export class OlympicService {
     return this.olympics$.asObservable();
   }
 
-  get0lympicsById(olympicId: number): /*Observable< Olympic | undefined>*/ void {
+  getOlympicsById(id: number): Observable<Olympic | undefined> {
+    return this.olympics$.asObservable().pipe(
+      map(olympics => {
+        let olympic = undefined
+        olympics.forEach(e=>{
+          if (e.id == id) {
+            olympic = e;
+          }
+        })
 
+        // Log or handle the case where the Olympic is not found
+        if (!olympic) {
+          console.warn(`Olympic with ID ${id} not found`);
+        }
+        console.log(olympic)
+        return olympic;
+      }),
+      catchError(error => {
+        // Log the error and return undefined in case of an error
+        console.error('Error fetching Olympic by ID:', error);
+        return of(undefined); // Return undefined on error
+      })
+    );
   }
 }
