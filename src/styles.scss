@@ -22,11 +22,12 @@
 .informations-container {
   margin-top: 30px;
   display: flex;
-  width: 50%;
+  width: 100%;
   justify-content: space-around;
-  p, h3 {
-    margin: 5px;
-  }
+}
+
+.chart-container {
+  width: 50vw;
 }
 
 
