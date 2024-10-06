@@ -16,7 +16,7 @@ Open a terminal in the project directory. Don't forget to install your node_modu
 
 Homepage: The application launches with an informative chart displaying details such as the number of medals by country and total Olympic participations.
 Country Detail: Click on a specific segment of the pie chart representing a country to navigate to the detailed country page. Here, you'll find in-depth information about that country's Olympic performance.
-Navigation: To return to the homepage, simply click the "Go back" button located at the bottom of the country detail page.
+Navigation: To return to the homepage, simply click the "Go back" button located at the top left of the country detail page.
 
 <!-- ## Where to start
 
