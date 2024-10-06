@@ -9,6 +9,14 @@
 
   p, h3 {
     margin: 5px;
-    font-size: 3vw;
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .informations {
+    p, h3 {
+      font-size: 3.5vw;
+    }
   }
 }
