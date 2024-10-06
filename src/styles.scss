@@ -24,6 +24,9 @@
   display: flex;
   width: 100%;
   justify-content: space-around;
+  margin-bottom: 20px;
+  max-width: 800px;
+  text-align: center;
 }
 
 .chart-container {
@@ -39,5 +42,26 @@
     padding: 5px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 600;
+  }
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 700px; // limits the chart width on large screens
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .chart-container {
+    max-width: 100%; // make the chart take full width on small screens
+  }
+}
+
+@media (max-width: 600px) {
+  .informations-container {
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
   }
 }
