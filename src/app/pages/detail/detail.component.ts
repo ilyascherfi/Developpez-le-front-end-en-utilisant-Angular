@@ -5,11 +5,21 @@ import { Olympic } from 'src/app/core/models/Olympic';
 import { Color, id, LegendPosition } from '@swimlane/ngx-charts';
 import { ActivatedRoute } from '@angular/router';
 
+
+interface ChartData {
+  name: string;
+   series:
+    { name: string,
+      value: number
+    }[]
+  }
+
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })
+
 
 export class DetailComponent implements OnInit {
   title: string = 'Name Country';
@@ -30,7 +40,7 @@ export class DetailComponent implements OnInit {
   yAxisLabel: string = 'Medals Count';
   timeline: boolean = true;
 
-  public chartData: any[] = [];
+  public chartData: ChartData[] = [];
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
@@ -58,7 +68,7 @@ export class DetailComponent implements OnInit {
             value: participation.medalsCount
           }));
 
-          this.chartData = [{
+          this.chartData= [{
             name: olympic.country,
             series: multi
           }];
