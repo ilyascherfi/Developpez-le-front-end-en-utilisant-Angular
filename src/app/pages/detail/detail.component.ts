@@ -2,7 +2,6 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Olympic } from 'src/app/core/models/Olympic';
-import { Color, id, LegendPosition } from '@swimlane/ngx-charts';
 import { ActivatedRoute } from '@angular/router';
 
 

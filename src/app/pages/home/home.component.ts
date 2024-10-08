@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Olympic } from 'src/app/core/models/Olympic';
-import { Color, id, LegendPosition } from '@swimlane/ngx-charts';
+import {LegendPosition } from '@swimlane/ngx-charts';
 import { Router } from '@angular/router';
 
 interface ChartData {
