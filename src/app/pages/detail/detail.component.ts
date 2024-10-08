@@ -1,5 +1,5 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core'; // Import de OnDestroy
+import { Observable, of, Subscription } from 'rxjs'; // Import de Subscription
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Olympic } from 'src/app/core/models/Olympic';
 import { ActivatedRoute } from '@angular/router';
@@ -18,9 +18,7 @@ interface ChartData {
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })
-
-
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, OnDestroy { // Ajout de OnDestroy
   title: string = 'Name Country';
   public olympics$: Observable<Olympic | undefined> = of(undefined);
   public totalAthleteCount: number = 0;
@@ -44,6 +42,8 @@ export class DetailComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
+  private subscription: Subscription | undefined; // Ajout de la propriété Subscription
+
   constructor(private olympicService: OlympicService,
               private route: ActivatedRoute) {}
 
@@ -53,7 +53,8 @@ export class DetailComponent implements OnInit {
     if (olympicId) {
       this.olympics$ = this.olympicService.getOlympicsById(olympicId);
 
-      this.olympics$.subscribe(olympic => {
+      // Stocker la souscription
+      this.subscription = this.olympics$.subscribe(olympic => {
         if (olympic) {
           // Calculate total athletes and medals
           olympic.participations.forEach(p => {
@@ -67,7 +68,7 @@ export class DetailComponent implements OnInit {
             value: participation.medalsCount
           }));
 
-          this.chartData= [{
+          this.chartData = [{
             name: olympic.country,
             series: multi
           }];
@@ -101,6 +102,13 @@ export class DetailComponent implements OnInit {
     } else {
       // Large screen (desktop)
       this.view = [700, 400];
+    }
+  }
+
+  // Ajout de ngOnDestroy pour se désinscrire de l'observable
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe(); // Désinscription propre
     }
   }
 }
