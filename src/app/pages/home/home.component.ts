@@ -1,8 +1,8 @@
-import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, OnInit, AfterViewInit, HostListener, OnDestroy } from '@angular/core';
+import { Observable, of, Subscription } from 'rxjs'; // Ajout de Subscription
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Olympic } from 'src/app/core/models/Olympic';
-import {LegendPosition } from '@swimlane/ngx-charts';
+import { LegendPosition } from '@swimlane/ngx-charts';
 import { Router } from '@angular/router';
 
 interface ChartData {
@@ -16,7 +16,7 @@ interface ChartData {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   view: [number, number] = [700, 400]; // default view dimensions
   gradient: boolean = true;
   showLegend: boolean = true;
@@ -28,15 +28,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
   };
 
   public olympics$: Observable<Olympic[]> = of([]);
-  public chartData: ChartData[] = []
+  public chartData: ChartData[] = [];
+  private subscription: Subscription | undefined; // Ajout d'une propriété pour la souscription
 
-  constructor(private olympicService: OlympicService,
-              private router: Router
-  ) {}
+  constructor(private olympicService: OlympicService, private router: Router) {}
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
-    this.olympics$.subscribe(olympicsDataArray => {
+    this.subscription = this.olympics$.subscribe(olympicsDataArray => {
       const chartData = olympicsDataArray.map(olympic => {
         let medalCount: number = 0;
         olympic.participations.forEach(participation => {
@@ -83,6 +82,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     if (selectedCountry !== undefined) {
       const id: number = selectedCountry.id;
       this.router.navigateByUrl(`details/${id}`);
+    }
+  }
+
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }
