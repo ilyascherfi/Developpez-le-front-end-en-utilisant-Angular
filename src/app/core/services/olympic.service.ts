@@ -43,7 +43,6 @@ export class OlympicService {
         if (!olympic) {
           console.warn(`Olympic with ID ${id} not found`);
         }
-        console.log(olympic)
         return olympic;
       }),
       catchError(error => {
